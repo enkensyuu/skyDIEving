@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "Player.h"
 
 // ウィンドウのタイトルに表示する文字列
 const char TITLE[] = "スカイDIEビング";
@@ -40,7 +41,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 
 	// ゲームループで使う変数の宣言
-
+	Player* player_ = new Player;
+	player_->Initialize();
 
 	// 最新のキーボード情報用
 	char keys[256] = {0};
@@ -63,10 +65,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//---------  ここからプログラムを記述  ----------//
 
 		// 更新処理
-
+		player_->Move(keys);
 
 		// 描画処理
-
+		player_->Draw();
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
 		ScreenFlip();
