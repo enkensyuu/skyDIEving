@@ -2,18 +2,20 @@
 #include "Airport.h"
 
 void Airport::Initialize() {
-	posX = 0;
-	posY = 0;
+	posX = 100;
+	posY = 100;
 	radiusX = 70;
 	radiusY = 40;
+	speed = 5;
 }
 
 void Airport::Update() {
-	if (posX >= 1200) {
-		posX--;
+	posX += speed;
+	if (posX >= 1130) {
+		speed = -speed;
 	}
-	if (posX <= 1200) {
-		posX++;
+	else if(posX <= 70){
+		speed = -speed;
 	}
 }
 

@@ -22,5 +22,6 @@ private:
 	int posY;
 	int radiusX;
 	int radiusY;
+	int speed;
 };
 
