@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "Airport.h"
+#include "Helicopter.h"
 
 // ウィンドウのタイトルに表示する文字列
 const char TITLE[] = "スカイDIEビング";
@@ -42,7 +43,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	// ゲームループで使う変数の宣言
 	Airport* airport = new Airport;
+	Helicopter* helicopter = new Helicopter;
+
+	//初期化
 	airport->Initialize();
+	helicopter->Initialize();
 
 	// 最新のキーボード情報用
 	char keys[256] = {0};
@@ -66,9 +71,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 		// 更新処理
 		airport->Update();
+		helicopter->Update();
 
 		// 描画処理
 		airport->Draw();
+		helicopter->Draw();
 
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
@@ -87,6 +94,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			break;
 		}
 	}
+
+	delete airport;
+	delete helicopter;
+
 	// Dxライブラリ終了処理
 	DxLib_End();
 
