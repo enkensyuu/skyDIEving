@@ -2,21 +2,23 @@
 #include "Airport.h"
 
 void Airport::Initialize() {
-	posX = 100;
-	posY = 100;
-	radiusX = 70;
-	radiusY = 40;
-	speed = 5;
+	posX = 1000;
+	posY = 1000;
+	radiusX = 140;
+	radiusY = 60;
+	speedX = 5;
+	speedY = 1;
 }
 
 void Airport::Update() {
-	posX += speed;
-	if (posX >= 1130) {
-		speed = -speed;
+	posX += speedX;
+	if (posX >= 1400) {
+		speedX = -speedX;
 	}
-	else if(posX <= 70){
-		speed = -speed;
+	else if(posX <= -200){
+		speedX = -speedX;
 	}
+	posY -= speedY;
 }
 
 void Airport::Draw() {
