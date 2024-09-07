@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "Airport.h"
 
 // ウィンドウのタイトルに表示する文字列
 const char TITLE[] = "スカイDIEビング";
@@ -37,10 +38,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// 画像などのリソースデータの変数宣言と読み込み
-
+	
 
 	// ゲームループで使う変数の宣言
-
+	Airport* airport = new Airport;
+	airport->Initialize();
 
 	// 最新のキーボード情報用
 	char keys[256] = {0};
@@ -63,9 +65,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//---------  ここからプログラムを記述  ----------//
 
 		// 更新処理
-
+		airport->Update();
 
 		// 描画処理
+		airport->Draw();
 
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
