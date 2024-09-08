@@ -37,5 +37,10 @@ private:
 
 	//ヘリが下がるタイマー
 	float changeTimer;
+
+	//ヘリの画像数
+	int GHandle[18];
+
+	int count;
 };
 
