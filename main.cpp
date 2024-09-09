@@ -1,6 +1,8 @@
 #include "DxLib.h"
 #include "Player.h"
 #include "Airport.h"
+#include "WindowL.h"
+#include "WindowR.h"
 
 // ウィンドウのタイトルに表示する文字列
 const char TITLE[] = "スカイDIEビング";
@@ -45,8 +47,15 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	Player* player_ = new Player;
 	player_->Initialize();
 
-	Airport* airport = new Airport;
-	airport->Initialize(0, 1000);
+	Airport* airport_ = new Airport;
+	airport_->Initialize(0, 1000);
+
+	WindowL* windowL_ = new WindowL;
+	windowL_->Initialize(1000);
+
+	WindowR* windowR_ = new WindowR;
+	windowR_->Initialize(500);
+
 	// 最新のキーボード情報用
 	char keys[256] = { 0 };
 
@@ -68,13 +77,19 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//---------  ここからプログラムを記述  ----------//
 
 		// 更新処理
-		airport->Update();
+		airport_->Update();
 		player_->Move(keys);
+		windowL_->Update();
+		windowR_->Update();
+		player_->WindowLOnCollision(windowL_->transform_.y, windowL_->transform_.ry);
+		player_->WindowROnCollision(windowR_->transform_.y, windowR_->transform_.ry);
 
 		// 描画処理
+		windowL_->Draw();
+		windowR_->Draw();
 		player_->Draw();
-		airport->Draw();
-
+		airport_->Draw();
+		
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
 		ScreenFlip();

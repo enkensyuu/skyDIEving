@@ -1,13 +1,14 @@
 #pragma once
 #include "Transform.h"
 
-class Airport {
-	
+class WindowL
+{
 public:
 	/// <summary>
 	/// ‰Šú‰»
 	/// </summary>
-	void Initialize(float x,float y);
+	/// <param name="y"></param>
+	void Initialize(float y);
 
 	/// <summary>
 	/// XV
@@ -21,7 +22,5 @@ public:
 
 public:
 	Transform transform_;
-	float speedX;
-	float speedY;
+	float speedY = 3.0f;
 };
-

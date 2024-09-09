@@ -136,10 +136,14 @@
     <ClCompile Include="Airport.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="WindowL.cpp" />
+    <ClCompile Include="WindowR.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="WindowL.h" />
+    <ClInclude Include="WindowR.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Airport.h" />

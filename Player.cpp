@@ -8,6 +8,7 @@ void Player::Initialize()
 	transform_.rx = 30.0f;
 	transform_.ry = 30.0f;
 	speed_ = 15.0f;
+	windowSpeed_ = 8.0f;
 }
 
 void Player::Move(char* key)
@@ -34,4 +35,28 @@ void Player::Move(char* key)
 void Player::Draw()
 {
 	DrawBox(transform_.x - transform_.rx, transform_.y - transform_.ry, transform_.x + transform_.rx, transform_.y + transform_.ry, GetColor(255, 0, 0), true);
+}
+
+void Player::WindowLOnCollision(float y, float ry)
+{
+	if (transform_.y - transform_.ry < y + ry && transform_.y + transform_.ry > y - ry)
+	{
+		transform_.x -= windowSpeed_;
+	}
+	if (transform_.x <= min_ + transform_.rx)
+	{
+		transform_.x = min_ + transform_.rx;
+	}
+}
+
+void Player::WindowROnCollision(float y, float ry)
+{
+	if (transform_.y - transform_.ry < y + ry && transform_.y + transform_.ry > y - ry)
+	{
+		transform_.x += windowSpeed_;
+	}
+	if (transform_.x >= max_ - transform_.rx)
+	{
+		transform_.x = max_ - transform_.rx;
+	}
 }
