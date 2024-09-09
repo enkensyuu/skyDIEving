@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "Player.h"
 #include "Airport.h"
 
 // ウィンドウのタイトルに表示する文字列
@@ -41,9 +42,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	
 
 	// ゲームループで使う変数の宣言
+	Player* player_ = new Player;
+	player_->Initialize();
+
 	Airport* airport = new Airport;
 	airport->Initialize();
-
 	// 最新のキーボード情報用
 	char keys[256] = {0};
 
@@ -66,8 +69,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 		// 更新処理
 		airport->Update();
+		player_->Move(keys);
 
 		// 描画処理
+		player_->Draw();
 		airport->Draw();
 
 		//---------  ここまでにプログラムを記述  ---------//
