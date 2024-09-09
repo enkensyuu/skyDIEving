@@ -1,4 +1,6 @@
 #pragma once
+#include "Transform.h"
+
 class Helicopter {
 
 public:
@@ -6,7 +8,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize();
+	void Initialize(float x, float y);
 
 	/// <summary>
 	/// 更新
@@ -18,22 +20,12 @@ public:
 	/// </summary>
 	void Draw();
 
-private:
-
-	//Xの位置設定
-	int posX;
-	//Yの位置設定
-	int posY;
-
-	//Xの半径設定
-	int radiusX;
-	//Yの半径設定
-	int radiusY;
-
-	//Xのスピード設定
-	int speedX;
+public:
+	Transform transform_;
+	
 	//Yのスピード設定
-	int speedY;
+	float upSpeed;
+	float downSpeed;
 
 	//ヘリが下がるタイマー
 	float changeTimer;
@@ -42,5 +34,9 @@ private:
 	int GHandle[18];
 
 	int count;
+	float max_ = -500;
+
+	bool isUp_;
+	bool isDown_;
 };
 

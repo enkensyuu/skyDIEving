@@ -45,23 +45,19 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 
 	// ゲームループで使う変数の宣言
-	Airport* airport = new Airport;
-	Helicopter* helicopter = new Helicopter;
-
 	//初期化
-	airport->Initialize(0,1000);
 	Player* player_ = new Player;
 	player_->Initialize();
-	helicopter->Initialize();
 
 	Airport* airport_ = new Airport;
-	airport_->Initialize(0, 1000);
 
 	WindowL* windowL_ = new WindowL;
-	windowL_->Initialize(1000);
 
 	WindowR* windowR_ = new WindowR;
-	windowR_->Initialize(500);
+
+	Helicopter* helicopter_ = new Helicopter;
+
+	int scene = 0;
 
 	// 最新のキーボード情報用
 	char keys[256] = { 0 };
@@ -84,23 +80,39 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//---------  ここからプログラムを記述  ----------//
 
 		// 更新処理
-		airport->Update();
-		helicopter->Update();
+		switch (scene)
+		{
+		case 0:
+			DrawFormatString(0, 0, GetColor(255, 0, 0), "scene=%d", scene);
+			if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0)
+			{
+				scene = 1;
+			}
+			break;
+		case 1:
+			DrawFormatString(0, 0, GetColor(255, 0, 0), "scene=%d", scene);
+			player_->Initialize();
+			if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0)
+			{
+				scene = 2;
+			}
+			break;
+		case 2:
+			player_->Move(keys);
+			player_->Draw();
+			break;
+		case 3:
 
-		airport_->Update();
-		player_->Move(keys);
-		windowL_->Update();
-		windowR_->Update();
-		player_->WindowLOnCollision(windowL_->transform_.y, windowL_->transform_.ry);
-		player_->WindowROnCollision(windowR_->transform_.y, windowR_->transform_.ry);
+			break;
+		case 4:
+
+			break;
+		case 5:
+
+			break;
+		}
 		// 描画処理
-		airport->Draw();
-		windowL_->Draw();
-		windowR_->Draw();
-		player_->Draw();
-		airport_->Draw();
-		
-		helicopter->Draw();
+
 
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
@@ -120,8 +132,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		}
 	}
 
-	delete airport;
-	delete helicopter;
+	delete player_;
+	delete windowL_;
+	delete windowR_;
+	delete airport_;
+	delete helicopter_;
 
 	// Dxライブラリ終了処理
 	DxLib_End();

@@ -22,12 +22,24 @@ public:
 	/// <summary>
 	/// 左の風の当たり判定
 	/// </summary>
-	void WindowLOnCollision(float y,float ry);
+	void WindowLOnCollision(float y, float ry);
 
 	/// <summary>
 	/// 右の風の当たり判定
 	/// </summary>
 	void WindowROnCollision(float y, float ry);
+
+	/// <summary>
+	/// 飛行機の当たり判定
+	/// </summary>
+	void AirportOnCollision(float x, float rx, float y, float ry);
+
+	/// <summary>
+	/// ヘリコプターの当たり判定
+	/// </summary>
+	void HelicopterOnCollision(float x, float rx, float y, float ry);
+
+	const bool isGetDeth();
 
 private:
 	Transform transform_;
@@ -35,4 +47,5 @@ private:
 	float min_ = 0.0f;
 	float speed_;
 	float windowSpeed_;
+	bool isDeth_;
 };

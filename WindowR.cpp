@@ -1,20 +1,36 @@
 #include "WindowR.h"
 #include "Dxlib.h"
 
-void WindowR::Initialize(float y)
+void WindowR::Initialize(float y1, float y2, float y3, float y4)
 {
-	transform_.x = 600.0f;
-	transform_.y = y;
-	transform_.rx = 600.0f;
-	transform_.ry = 100.0f;
+	for (int i = 0; i < _countof(transform_); i++)
+	{
+		transform_[i].x = 600.0f;
+		transform_[0].y = y1;
+		transform_[1].y = y2;
+		transform_[2].y = y3;
+		transform_[3].y = y4;
+		transform_[i].rx = 600.0f;
+		transform_[i].ry = 100.0f;
+	}
 }
 
 void WindowR::Update()
 {
-	transform_.y -= speedY;
+	for (int i = 0; i < _countof(transform_); i++)
+	{
+		transform_[i].y -= speedY;
+		if (transform_[i].y <= max_ - transform_[i].ry)
+		{
+			transform_[i].y = max_ - transform_[i].ry;
+		}
+	}
 }
 
 void WindowR::Draw()
 {
-	DrawBox(transform_.x - transform_.rx, transform_.y - transform_.ry, transform_.x + transform_.rx, transform_.y + transform_.ry, GetColor(0, 0, 255), true);
+	for (int i = 0; i < _countof(transform_); i++)
+	{
+		DrawBox(transform_[i].x - transform_[i].rx, transform_[i].y - transform_[i].ry, transform_[i].x + transform_[i].rx, transform_[i].y + transform_[i].ry, GetColor(0, 0, 255), true);
+	}
 }

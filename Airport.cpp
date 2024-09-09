@@ -19,6 +19,11 @@ void Airport::Update() {
 		speedX = -speedX;
 	}
 	transform_.y -= speedY;
+
+	if (transform_.y <= max_ - transform_.ry)
+	{
+		transform_.y = max_ - transform_.ry;
+	}
 }
 
 void Airport::Draw() {

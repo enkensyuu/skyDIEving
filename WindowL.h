@@ -8,7 +8,7 @@ public:
 	/// ‰Šú‰»
 	/// </summary>
 	/// <param name="y"></param>
-	void Initialize(float y);
+	void Initialize(float y1,float y2, float y3, float y4);
 
 	/// <summary>
 	/// XV
@@ -21,6 +21,7 @@ public:
 	void Draw();
 
 public:
-	Transform transform_;
+	Transform transform_[4];
 	float speedY = 3.0f;
+	float max_ = 0;
 };

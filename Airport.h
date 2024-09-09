@@ -23,5 +23,6 @@ public:
 	Transform transform_;
 	float speedX;
 	float speedY;
+	float max_ = 0;
 };
 

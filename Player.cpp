@@ -9,6 +9,7 @@ void Player::Initialize()
 	transform_.ry = 30.0f;
 	speed_ = 15.0f;
 	windowSpeed_ = 8.0f;
+	isDeth_ = false;
 }
 
 void Player::Move(char* key)
@@ -59,4 +60,31 @@ void Player::WindowROnCollision(float y, float ry)
 	{
 		transform_.x = max_ - transform_.rx;
 	}
+}
+
+void Player::AirportOnCollision(float x, float rx, float y, float ry)
+{
+	if (transform_.x - transform_.rx < x + rx && transform_.x + transform_.rx > x - rx)
+	{
+		if (transform_.y - transform_.ry < y + ry && transform_.y + transform_.ry > y - ry)
+		{
+			isDeth_ = true;
+		}
+	}
+}
+
+void Player::HelicopterOnCollision(float x, float rx, float y, float ry)
+{
+	if (transform_.x - transform_.rx < x + rx && transform_.x + transform_.rx > x - rx)
+	{
+		if (transform_.y - transform_.ry < y + ry && transform_.y + transform_.ry > y - ry)
+		{
+			isDeth_ = true;
+		}
+	}
+}
+
+const bool Player::isGetDeth()
+{
+	return isDeth_;
 }
