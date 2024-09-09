@@ -49,7 +49,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	Helicopter* helicopter = new Helicopter;
 
 	//‰Šú‰»
-	airport->Initialize();
+	airport->Initialize(0,1000);
 	Player* player_ = new Player;
 	player_->Initialize();
 	helicopter->Initialize();
