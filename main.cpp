@@ -12,7 +12,7 @@ const int WIN_WIDTH = 1200;
 const int WIN_HEIGHT = 1080;
 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine,
-                   _In_ int nCmdShow) {
+	_In_ int nCmdShow) {
 	// ウィンドウモードに設定
 	ChangeWindowMode(TRUE);
 
@@ -39,19 +39,19 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// 画像などのリソースデータの変数宣言と読み込み
-	
+
 
 	// ゲームループで使う変数の宣言
 	Player* player_ = new Player;
 	player_->Initialize();
 
 	Airport* airport = new Airport;
-	airport->Initialize();
+	airport->Initialize(0, 1000);
 	// 最新のキーボード情報用
-	char keys[256] = {0};
+	char keys[256] = { 0 };
 
 	// 1ループ(フレーム)前のキーボード情報
-	char oldkeys[256] = {0};
+	char oldkeys[256] = { 0 };
 
 	// ゲームループ
 	while (true) {

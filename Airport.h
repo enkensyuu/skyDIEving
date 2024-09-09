@@ -1,11 +1,13 @@
 #pragma once
+#include "Transform.h"
+
 class Airport {
 	
 public:
 	/// <summary>
 	/// ‰Šú‰»
 	/// </summary>
-	void Initialize();
+	void Initialize(float x,float y);
 
 	/// <summary>
 	/// XV
@@ -18,10 +20,7 @@ public:
 	void Draw();
 
 private:
-	int posX;
-	int posY;
-	int radiusX;
-	int radiusY;
+	Transform transform_;
 	int speedX;
 	int speedY;
 };

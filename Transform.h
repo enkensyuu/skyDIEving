@@ -3,5 +3,6 @@ typedef struct Transform
 {
 	float x;
 	float y;
-	float r;
+	float rx;
+	float ry;
 }Transform;

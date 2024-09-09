@@ -1,26 +1,26 @@
 #include <DxLib.h>
 #include "Airport.h"
 
-void Airport::Initialize() {
-	posX = 1000;
-	posY = 1000;
-	radiusX = 140;
-	radiusY = 60;
-	speedX = 5;
-	speedY = 1;
+void Airport::Initialize(float x, float y) {
+	transform_.x = x;
+	transform_.y = y;
+	transform_.rx = 140;
+	transform_.ry = 60;
+	speedX = 15;
+	speedY = 3;
 }
 
 void Airport::Update() {
-	posX += speedX;
-	if (posX >= 1400) {
+	transform_.x += speedX;
+	if (transform_.x >= 1400) {
 		speedX = -speedX;
 	}
-	else if(posX <= -200){
+	else if(transform_.x <= -200){
 		speedX = -speedX;
 	}
-	posY -= speedY;
+	transform_.y -= speedY;
 }
 
 void Airport::Draw() {
-	DrawBox(posX - radiusX, posY - radiusY, posX + radiusX, posY + radiusY, GetColor(255, 255, 255), true);
+	DrawBox(transform_.x - transform_.rx, transform_.y - transform_.ry, transform_.x + transform_.rx, transform_.y + transform_.ry, GetColor(255, 255, 255), true);
 }
