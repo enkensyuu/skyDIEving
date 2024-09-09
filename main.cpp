@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "Player.h"
 #include "Airport.h"
+#include "Helicopter.h"
 #include "WindowL.h"
 #include "WindowR.h"
 
@@ -44,8 +45,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 
 	// ゲームループで使う変数の宣言
+	Airport* airport = new Airport;
+	Helicopter* helicopter = new Helicopter;
+
+	//初期化
+	airport->Initialize();
 	Player* player_ = new Player;
 	player_->Initialize();
+	helicopter->Initialize();
 
 	Airport* airport_ = new Airport;
 	airport_->Initialize(0, 1000);
@@ -77,19 +84,24 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//---------  ここからプログラムを記述  ----------//
 
 		// 更新処理
+		airport->Update();
+		helicopter->Update();
+
 		airport_->Update();
 		player_->Move(keys);
 		windowL_->Update();
 		windowR_->Update();
 		player_->WindowLOnCollision(windowL_->transform_.y, windowL_->transform_.ry);
 		player_->WindowROnCollision(windowR_->transform_.y, windowR_->transform_.ry);
-
 		// 描画処理
+		airport->Draw();
 		windowL_->Draw();
 		windowR_->Draw();
 		player_->Draw();
 		airport_->Draw();
 		
+		helicopter->Draw();
+
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
 		ScreenFlip();
@@ -107,6 +119,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			break;
 		}
 	}
+
+	delete airport;
+	delete helicopter;
+
 	// Dxライブラリ終了処理
 	DxLib_End();
 
