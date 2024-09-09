@@ -21,7 +21,8 @@ public:
 	void Draw();
 
 public:
-	Transform transform_[4];
+	static const int num_ = 4;
+	Transform transform_[num_];
 	float speedY = 3.0f;
 	float max_ = 0;
 };

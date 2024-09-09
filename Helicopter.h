@@ -8,7 +8,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(float x, float y);
+	void Initialize(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
 
 	/// <summary>
 	/// 更新
@@ -21,14 +21,16 @@ public:
 	void Draw();
 
 public:
-	Transform transform_;
+	static const int num_ = 4;
+
+	Transform transform_[num_];
 	
 	//Yのスピード設定
 	float upSpeed;
 	float downSpeed;
 
 	//ヘリが下がるタイマー
-	float changeTimer;
+	float changeTimer[num_];
 
 	//ヘリの画像数
 	int GHandle[18];
@@ -36,7 +38,7 @@ public:
 	int count;
 	float max_ = -500;
 
-	bool isUp_;
-	bool isDown_;
+	bool isUp_[num_];
+	bool isDown_[num_];
 };
 

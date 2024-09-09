@@ -1,16 +1,25 @@
 #include "Dxlib.h"
 #include "helicopter.h"
 
-void Helicopter::Initialize(float x, float y) {
-	transform_.x = x;
-	transform_.y = y;
-	transform_.rx = 140;
-	transform_.ry = 60;
-	upSpeed = 8;
-	downSpeed = 3;
-	changeTimer = 60.0f;
-	isUp_ = true;
-	isDown_ = false;
+void Helicopter::Initialize(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
+	for (int i = 0; i < _countof(transform_); i++)
+	{
+		transform_[0].x = x1;
+		transform_[0].y = y1;
+		transform_[1].x = x2;
+		transform_[1].y = y2;
+		transform_[2].x = x3;
+		transform_[2].y = y3;
+		transform_[3].x = x4;
+		transform_[3].y = y4;
+		transform_[i].rx = 140;
+		transform_[i].ry = 60;
+		upSpeed = 8;
+		downSpeed = 3;
+		changeTimer[0] = 60.0f;
+		isUp_[0] = true;
+		isDown_[0] = false;
+	}
 
 	count = 0;
 
@@ -54,5 +63,8 @@ void Helicopter::Update() {
 }
 
 void Helicopter::Draw() {
-	DrawGraph(transform_.x - transform_.rx, transform_.y - transform_.ry, GHandle[count], TRUE);
+	for (int i = 0; i < _countof(transform_); i++)
+	{
+		DrawGraph(transform_[i].x - transform_[i].rx, transform_[i].y - transform_[i].ry, GHandle[count], TRUE);
+	}
 }
