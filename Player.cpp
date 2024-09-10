@@ -84,7 +84,13 @@ void Player::HelicopterOnCollision(float x, float rx, float y, float ry)
 	}
 }
 
-const bool Player::isGetDeth()
+void Player::GoalOnCollision(float x, float rx, float y, float ry)
 {
-	return isDeth_;
+	if (transform_.x - transform_.rx < x + rx && transform_.x + transform_.rx > x - rx)
+	{
+		if (transform_.y - transform_.ry < y + ry && transform_.y + transform_.ry > y - ry)
+		{
+			isDeth_ = true;
+		}
+	}
 }

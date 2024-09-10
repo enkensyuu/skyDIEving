@@ -59,6 +59,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	int scene = 0;
 
+	int Graph = LoadGraph("Resources/back.png");
+
 	// 最新のキーボード情報用
 	char keys[256] = { 0 };
 
@@ -91,15 +93,37 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			break;
 		case 1:
 			DrawFormatString(0, 0, GetColor(255, 0, 0), "scene=%d", scene);
-			player_->Initialize();
 			if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0)
 			{
+				player_->Initialize();
+				airport_->Initialize(0, 900, 1200, 1300, -1000, -1000, -1000, -1000);
+				windowL_->Initialize(-1000, 1200, -1000, -1000);
+				helicopter_->Initialize(600, 1500, 1000, 1500, -1000, -1000, -1000, -1000);
 				scene = 2;
 			}
 			break;
 		case 2:
 			player_->Move(keys);
+			for (int i = 0; i < 4; i++)
+			{
+				player_->AirportOnCollision(airport_->transform_[i].x, airport_->transform_[i].rx, airport_->transform_[i].y, airport_->transform_[i].ry);
+				player_->WindowLOnCollision(windowL_->transform_[i].y, windowL_->transform_[i].ry);
+				player_->HelicopterOnCollision(helicopter_->transform_[i].x, helicopter_->transform_[i].rx, helicopter_->transform_[i].y, helicopter_->transform_[i].ry);
+			}
+
+			if (player_->isGetDeth())
+			{
+				scene = 6;
+			}
+
+			airport_->Update();
+			windowL_->Update();
+			helicopter_->Update();
+			DrawGraph(0, 0, Graph, true);
+			windowL_->Draw();
 			player_->Draw();
+			airport_->Draw();
+			helicopter_->Draw();
 			break;
 		case 3:
 
@@ -109,6 +133,13 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			break;
 		case 5:
 
+			break;
+		case 6:
+			DrawFormatString(0, 0, GetColor(255, 0, 0), "scene=%d", scene);
+			if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0)
+			{
+				scene = 0;
+			}
 			break;
 		}
 		// 描画処理

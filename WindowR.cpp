@@ -13,10 +13,17 @@ void WindowR::Initialize(float y1, float y2, float y3, float y4)
 		transform_[i].rx = 600.0f;
 		transform_[i].ry = 100.0f;
 	}
+	count = 0;
+
+	LoadDivGraph("Resources/windLeft.png", 7, 7, 1, 1200, 200, GHandle);
 }
 
 void WindowR::Update()
 {
+	count++;
+	if (count == 18) {
+		count = 0;
+	}
 	for (int i = 0; i < _countof(transform_); i++)
 	{
 		transform_[i].y -= speedY;
@@ -31,6 +38,6 @@ void WindowR::Draw()
 {
 	for (int i = 0; i < _countof(transform_); i++)
 	{
-		DrawBox(transform_[i].x - transform_[i].rx, transform_[i].y - transform_[i].ry, transform_[i].x + transform_[i].rx, transform_[i].y + transform_[i].ry, GetColor(0, 0, 255), true);
+		DrawGraph(transform_[i].x - transform_[i].rx, transform_[i].y - transform_[i].ry, GHandle[count], TRUE);
 	}
 }

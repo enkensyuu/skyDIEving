@@ -25,5 +25,9 @@ public:
 	Transform transform_[num_];
 	float speedY = 3.0f;
 	float max_ = 0;
+	//‰æ‘œ”
+	int GHandle[7];
+
+	int count;
 };
 
