@@ -67,7 +67,7 @@ void Player::AirportOnCollision(float x, float rx, float y, float ry)
 {
 	if (transform_.x - transform_.rx < x + rx && transform_.x + transform_.rx > x - rx)
 	{
-		if (transform_.y - transform_.ry + 40 < y + ry && transform_.y + transform_.ry > y - ry)		{
+		if (transform_.y - transform_.ry  < y + ry && transform_.y + transform_.ry > y - ry)		{
 			isDeth_ = true;
 		}
 	}
@@ -75,9 +75,9 @@ void Player::AirportOnCollision(float x, float rx, float y, float ry)
 
 void Player::HelicopterOnCollision(float x, float rx, float y, float ry)
 {
-	if (transform_.x - transform_.rx + 10 < x + rx && transform_.x + transform_.rx - 10 > x - rx)
+	if (transform_.x - transform_.rx < x + rx && transform_.x + transform_.rx > x - rx)
 	{
-		if (transform_.y - transform_.ry + 10 < y + ry && transform_.y + transform_.ry - 10 > y - ry)
+		if (transform_.y - transform_.ry < y + ry && transform_.y + transform_.ry > y - ry)
 		{
 			isDeth_ = true;
 		}
