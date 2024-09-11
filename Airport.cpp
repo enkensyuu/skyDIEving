@@ -27,7 +27,8 @@ void Airport::Initialize(float x1, float y1, float x2, float y2, float x3, float
 	changeR[2] = false;
 	changeL[3] = false;
 	changeR[3] = true;
-
+	GraphL = LoadGraph("Resources/airport.png");
+	GraphR = LoadGraph("Resources/airportRight.png");
 }
 
 void Airport::Update() {
@@ -125,8 +126,12 @@ void Airport::Update() {
 
 void Airport::Draw() {
 
-	for (int i = 0; i < 4; i++)
+	if (changeL[0])
 	{
-		DrawBox(transform_[i].x - transform_[i].rx, transform_[i].y - transform_[i].ry, transform_[i].x + transform_[i].rx, transform_[i].y + transform_[i].ry, GetColor(255, 255, 255), true);
+		DrawGraph(transform_[0].x - transform_[0].rx, transform_[0].y - transform_[0].ry, GraphL, true);
+	}
+	else if (changeR)
+	{
+		DrawGraph(transform_[0].x - transform_[0].rx, transform_[0].y - transform_[0].ry, GraphR, true);
 	}
 }

@@ -42,7 +42,7 @@ public:
 	/// <summary>
 	/// ƒS[ƒ‹‚Ì“–‚½‚è”»’è
 	/// </summary>
-	void GoalOnCollision(float x, float rx, float y, float ry);
+	void GoalOnCollision(float y, float ry);
 
 	const bool isGetDeth() { return isDeth_; }
 	const bool isGetGoal() { return isGoal_; }

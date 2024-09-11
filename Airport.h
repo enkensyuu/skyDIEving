@@ -28,5 +28,7 @@ public:
 	bool changeL[num_];
 	bool changeR[num_];
 	float max_ = 0;
+	int GraphL;
+	int GraphR;
 };
 

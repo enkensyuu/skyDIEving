@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Airport.cpp" />
+    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="Helicopter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />

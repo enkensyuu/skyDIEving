@@ -4,14 +4,9 @@
 class Goal
 {
 public:
-	void Initialize(float x, float y) { transform_.x = x; transform_.y = y; transform_.rx = 600; transform_.ry = 100; }
+	void Initialize(float y);
 
-	void Update() {
-		transform_.y -= speed_; if (transform_.y <= max_ - transform_.ry)
-		{
-			transform_.y = max_ - transform_.ry;
-		}
-	}
+	void Update();
 
 public:
 	Transform transform_;
