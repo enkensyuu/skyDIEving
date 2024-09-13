@@ -5,6 +5,7 @@
 #include "WindowL.h"
 #include "WindowR.h"
 #include "Goal.h"
+#include "FPS.h"
 
 // ウィンドウのタイトルに表示する文字列
 const char TITLE[] = "スカイDIEビング";
@@ -36,6 +37,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	// 画面の背景色を設定する
 	SetBackgroundColor(0x00, 0x00, 0x00);
 
+	//垂直同期を切る
+	SetWaitVSyncFlag(0);
+
 	// DXlibの初期化
 	if (DxLib_Init() == -1) { return -1; }
 
@@ -59,6 +63,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	Helicopter* helicopter_ = new Helicopter;
 
 	Goal* goal_ = new Goal;
+
+	FPS* fps_ = new FPS;
 
 	int scene = 0;
 
@@ -111,11 +117,16 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		ClearDrawScreen();
 		//---------  ここからプログラムを記述  ----------//
 
+		 //フレームレート制御
+		fps_->Update();
+
 		// 更新処理
 		switch (scene)
 		{
 		case 0:
 			DrawGraph(0, 0, titleGraph, true);
+			//フレームレート表示
+			fps_->Draw();
 			if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0)
 			{
 				scene = 1;
@@ -125,24 +136,16 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			DrawGraph(0, 0, opeGraph, true);
 			if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0)
 			{
-				/*player_->Initialize();
+				player_->Initialize();
 				airport_->Initialize(0, 900, 1200, 1300, -1000, -1000, -1000, -1000);
 				windowL_->Initialize(-1000, 1200, -1000, -1000);
 				helicopter_->Initialize(600, 1500, 1000, 1500, -1000, -1000, -1000, -1000);
 				goal_->Initialize(2500);
 				stopTimer = 360;
 				isStop = true;
-				select = true;*/
-				player_->Initialize();
-				airport_->Initialize(1750, 900, -100, 1500, 0, 2300, 900, 3000);
-				windowL_->Initialize(800, 1600, 2400, 3200);
-				windowR_->Initialize(1200, 2000, 2800, 3600);
-				helicopter_->Initialize(100, 1000, 1060, 1500, 500, 1700, 1000, 2200);
-				goal_->Initialize(4000);
-				stopTimer = 360;
-				isStop = true;
 				select = true;
-				scene = 4;
+
+				scene = 2;
 			}
 			break;
 		case 2:
@@ -221,6 +224,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			{
 				DrawGraph(280, 255, startGraph, true);
 			}
+			fps_->Draw();
 
 			break;
 		case 3:
@@ -398,11 +402,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			else if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0 && stageFlag == 2)
 			{
 				player_->Initialize();
-				airport_->Initialize(0, 900, 1200, 1200, 0, 1800, 1200, 2300);
-				windowL_->Initialize(200, 1000, 1800, 2600);
-				windowR_->Initialize(600, 1400, 2200, 3000);
-				helicopter_->Initialize(100, 1000, 1060, 1500, 500, 1700, 1000, 2200);
-				goal_->Initialize(3500);
+				airport_->Initialize(1750, 900, -200, 1500, 0, 2200, 900, 2800);
+				windowL_->Initialize(800, 1200, 1600, 2000);
+				windowR_->Initialize(1000, 1400, 1800, 2200);
+				helicopter_->Initialize(100, 1000, 1060, 1500, 500, 1700, 700, 2200);
+				goal_->Initialize(3650);
 				stopTimer = 360;
 				isStop = true;
 				select = true;
@@ -469,11 +473,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 					else if (nowScene == 4)
 					{
 						player_->Initialize();
-						airport_->Initialize(0, 900, 1200, 1200, 0, 1800, 1200, 2300);
-						windowL_->Initialize(200, 1000, 1800, 2600);
-						windowR_->Initialize(600, 1400, 2200, 3000);
-						helicopter_->Initialize(100, 1000, 1060, 1500, 500, 1700, 1000, 2200);
-						goal_->Initialize(3500);
+						airport_->Initialize(1750, 900, -200, 1500, 0, 2200, 900, 2800);
+						windowL_->Initialize(800, 1200, 1600, 2000);
+						windowR_->Initialize(1000, 1400, 1800, 2200);
+						helicopter_->Initialize(100, 1000, 1060, 1500, 500, 1700, 700, 2200);
+						goal_->Initialize(3650);
 						stopTimer = 360;
 						isStop = true;
 						select = true;

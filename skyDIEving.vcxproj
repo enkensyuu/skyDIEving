@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="Airport.cpp" />
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="FPS.cpp" />
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="Helicopter.cpp" />
     <ClCompile Include="main.cpp" />
@@ -144,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="FPS.h" />
     <ClInclude Include="Goal.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Transform.h" />
