@@ -8,7 +8,7 @@
 #include "FPS.h"
 
 // ウィンドウのタイトルに表示する文字列
-const char TITLE[] = "スカイDIEビング";
+const char TITLE[] = "4043_スカイDIEビング";
 
 // ウィンドウ横幅
 const int WIN_WIDTH = 1200;
@@ -125,8 +125,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		{
 		case 0:
 			DrawGraph(0, 0, titleGraph, true);
-			//フレームレート表示
-			fps_->Draw();
 			if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0)
 			{
 				scene = 1;
