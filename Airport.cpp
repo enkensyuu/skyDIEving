@@ -27,7 +27,7 @@ void Airport::Initialize(float x1, float y1, float x2, float y2, float x3, float
 	changeR[2] = false;
 	changeL[3] = false;
 	changeR[3] = true;
-	GraphL = LoadGraph("Resources/airport.png");
+	GraphL = LoadGraph("Resources/airportLeft.png");
 	GraphR = LoadGraph("Resources/airportRight.png");
 }
 
