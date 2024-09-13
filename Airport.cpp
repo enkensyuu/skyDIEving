@@ -126,12 +126,47 @@ void Airport::Update() {
 
 void Airport::Draw() {
 
+#pragma region 1機目
 	if (changeL[0])
 	{
 		DrawGraph(transform_[0].x - transform_[0].rx, transform_[0].y - transform_[0].ry, GraphL, true);
 	}
-	else if (changeR)
+	else if (changeR[0])
 	{
 		DrawGraph(transform_[0].x - transform_[0].rx, transform_[0].y - transform_[0].ry, GraphR, true);
 	}
+#pragma endregion
+
+#pragma region 2機目
+	if (changeL[1])
+	{
+		DrawGraph(transform_[1].x - transform_[1].rx, transform_[1].y - transform_[1].ry, GraphL, true);
+	}
+	else if (changeR[1])
+	{
+		DrawGraph(transform_[1].x - transform_[1].rx, transform_[1].y - transform_[1].ry, GraphR, true);
+	}
+#pragma endregion
+
+#pragma region 3機目
+	if (changeL[2])
+	{
+		DrawGraph(transform_[2].x - transform_[2].rx, transform_[2].y - transform_[2].ry, GraphL, true);
+	}
+	else if (changeR[2])
+	{
+		DrawGraph(transform_[2].x - transform_[2].rx, transform_[2].y - transform_[2].ry, GraphR, true);
+	}
+#pragma endregion
+
+#pragma region 4機目
+	if (changeL[3])
+	{
+		DrawGraph(transform_[3].x - transform_[3].rx, transform_[3].y - transform_[3].ry, GraphL, true);
+	}
+	else if (changeR[3])
+	{
+		DrawGraph(transform_[3].x - transform_[3].rx, transform_[3].y - transform_[3].ry, GraphR, true);
+	}
+#pragma endregion
 }

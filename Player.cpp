@@ -11,6 +11,7 @@ void Player::Initialize()
 	windowSpeed_ = 8.0f;
 	isDeth_ = false;
 	isGoal_ = false;
+	Graph = LoadGraph("Resources/player.png");
 }
 
 void Player::Move(char* key)
@@ -36,7 +37,7 @@ void Player::Move(char* key)
 
 void Player::Draw()
 {
-	DrawBox(transform_.x - transform_.rx, transform_.y - transform_.ry, transform_.x + transform_.rx, transform_.y + transform_.ry, GetColor(255, 0, 0), true);
+	DrawGraph(transform_.x - transform_.rx, transform_.y - transform_.ry, Graph, true);
 }
 
 void Player::WindowLOnCollision(float y, float ry)

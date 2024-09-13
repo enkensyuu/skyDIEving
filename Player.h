@@ -55,4 +55,5 @@ private:
 	float windowSpeed_;
 	bool isDeth_;
 	bool isGoal_;
+	int Graph;
 };
