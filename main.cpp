@@ -222,7 +222,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			{
 				DrawGraph(280, 255, startGraph, true);
 			}
-			fps_->Draw();
 
 			break;
 		case 3:
