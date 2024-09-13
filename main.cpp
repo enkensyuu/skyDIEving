@@ -79,6 +79,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	int stage1Graph = LoadGraph("Resources/Stage1.png");
 	int stage2Graph = LoadGraph("Resources/Stage2.png");
 	int stage3Graph = LoadGraph("Resources/Stage3.png");
+	PlaySoundFile("Resources/BGM.mp3", DX_PLAYTYPE_LOOP);
 #pragma endregion
 
 	int graphX = 0;
