@@ -124,14 +124,24 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			DrawGraph(0, 0, opeGraph, true);
 			if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0)
 			{
-				player_->Initialize();
+				/*player_->Initialize();
 				airport_->Initialize(0, 900, 1200, 1300, -1000, -1000, -1000, -1000);
 				windowL_->Initialize(-1000, 1200, -1000, -1000);
 				helicopter_->Initialize(600, 1500, 1000, 1500, -1000, -1000, -1000, -1000);
 				goal_->Initialize(2500);
 				stopTimer = 360;
 				isStop = true;
-				scene = 2;
+				select = true;*/
+				player_->Initialize();
+				airport_->Initialize(1750, 900, -100, 1500, 0, 2300, 900, 3000);
+				windowL_->Initialize(800, 1600, 2400, 3200);
+				windowR_->Initialize(1200, 2000, 2800, 3600);
+				helicopter_->Initialize(100, 1000, 1060, 1500, 500, 1700, 1000, 2200);
+				goal_->Initialize(4000);
+				stopTimer = 360;
+				isStop = true;
+				select = true;
+				scene = 4;
 			}
 			break;
 		case 2:
@@ -213,19 +223,188 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 			break;
 		case 3:
+			stopTimer--;
+			if (stopTimer < 0)
+			{
+				isStop = false;
+			}
+			if (!isStop)
+			{
+				graphY -= 3;
+				graphY2 -= 3;
 
+				if (graphY <= -1080)
+				{
+					graphY = 1080;
+				}
+				if (graphY2 <= -1080)
+				{
+					graphY2 = 1080;
+				}
+				player_->Move(keys);
+				for (int i = 0; i < 4; i++)
+				{
+					player_->AirportOnCollision(airport_->transform_[i].x, airport_->transform_[i].rx, airport_->transform_[i].y, airport_->transform_[i].ry);
+					player_->WindowLOnCollision(windowL_->transform_[i].y, windowL_->transform_[i].ry);
+					player_->HelicopterOnCollision(helicopter_->transform_[i].x, helicopter_->transform_[i].rx, helicopter_->transform_[i].y, helicopter_->transform_[i].ry);
+				}
+
+				player_->GoalOnCollision(goal_->transform_.y, goal_->transform_.ry);
+
+				if (player_->isGetGoal())
+				{
+					stageFlag = 2;
+					scene = 5;
+				}
+
+				if (player_->isGetDeth())
+				{
+					nowScene = scene;
+					select = true;
+					scene = 6;
+				}
+
+				airport_->Update();
+				windowL_->Update();
+				helicopter_->Update();
+				goal_->Update();
+			}
+
+			DrawGraph(graphX, graphY, backGraph, true);
+			DrawGraph(graphX, graphY2, backGraph, true);
+			windowL_->Draw();
+			player_->Draw();
+			airport_->Draw();
+			helicopter_->Draw();
+
+			if (stopTimer < 360 && stopTimer>240)
+			{
+				DrawGraph(280, 255, stage2Graph, true);
+			}
+
+			else if (stopTimer < 240 && stopTimer>180)
+			{
+				DrawGraph(536, 255, threeGraph, true);
+			}
+			else if (stopTimer < 180 && stopTimer>120)
+			{
+				DrawGraph(536, 255, twoGraph, true);
+			}
+			else if (stopTimer < 120 && stopTimer>60)
+			{
+				DrawGraph(536, 255, oneGraph, true);
+			}
+			else if (stopTimer < 60 && stopTimer>0)
+			{
+				DrawGraph(280, 255, startGraph, true);
+			}
 			break;
-		case 4:
 
+		case 4:
+			stopTimer--;
+			if (stopTimer < 0)
+			{
+				isStop = false;
+			}
+			if (!isStop)
+			{
+				graphY -= 3;
+				graphY2 -= 3;
+
+				if (graphY <= -1080)
+				{
+					graphY = 1080;
+				}
+				if (graphY2 <= -1080)
+				{
+					graphY2 = 1080;
+				}
+				player_->Move(keys);
+				for (int i = 0; i < 4; i++)
+				{
+					player_->AirportOnCollision(airport_->transform_[i].x, airport_->transform_[i].rx, airport_->transform_[i].y, airport_->transform_[i].ry);
+					player_->WindowLOnCollision(windowL_->transform_[i].y, windowL_->transform_[i].ry);
+					player_->WindowROnCollision(windowR_->transform_[i].y, windowR_->transform_[i].ry);
+					player_->HelicopterOnCollision(helicopter_->transform_[i].x, helicopter_->transform_[i].rx, helicopter_->transform_[i].y, helicopter_->transform_[i].ry);
+				}
+
+				player_->GoalOnCollision(goal_->transform_.y, goal_->transform_.ry);
+
+				if (player_->isGetGoal())
+				{
+					stageFlag = 3;
+					scene = 5;
+				}
+
+				if (player_->isGetDeth())
+				{
+					nowScene = scene;
+					select = true;
+					scene = 6;
+				}
+
+				airport_->Update();
+				windowL_->Update();
+				windowR_->Update();
+				helicopter_->Update();
+				goal_->Update();
+			}
+
+			DrawGraph(graphX, graphY, backGraph, true);
+			DrawGraph(graphX, graphY2, backGraph, true);
+			windowL_->Draw();
+			windowR_->Draw();
+			player_->Draw();
+			airport_->Draw();
+			helicopter_->Draw();
+
+			if (stopTimer < 360 && stopTimer>240)
+			{
+				DrawGraph(280, 255, stage3Graph, true);
+			}
+
+			else if (stopTimer < 240 && stopTimer>180)
+			{
+				DrawGraph(536, 255, threeGraph, true);
+			}
+			else if (stopTimer < 180 && stopTimer>120)
+			{
+				DrawGraph(536, 255, twoGraph, true);
+			}
+			else if (stopTimer < 120 && stopTimer>60)
+			{
+				DrawGraph(536, 255, oneGraph, true);
+			}
+			else if (stopTimer < 60 && stopTimer>0)
+			{
+				DrawGraph(280, 255, startGraph, true);
+			}
 			break;
 		case 5:
 			DrawGraph(0, 0, clearGraph, true);
 			if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0 && stageFlag == 1)
 			{
+				player_->Initialize();
+				airport_->Initialize(0, 800, 1200, 900, 0, 1800, 1200, 1900);
+				windowL_->Initialize(1300, 1500, -1000, -1000);
+				helicopter_->Initialize(0, 1500, 600, 1500, 1200, 1500, -1000, -1000);
+				goal_->Initialize(2500);
+				stopTimer = 360;
+				isStop = true;
+				select = true;
 				scene = 3;
 			}
-			if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0 && stageFlag == 2)
+			else if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0 && stageFlag == 2)
 			{
+				player_->Initialize();
+				airport_->Initialize(0, 900, 1200, 1200, 0, 1800, 1200, 2300);
+				windowL_->Initialize(200, 1000, 1800, 2600);
+				windowR_->Initialize(600, 1400, 2200, 3000);
+				helicopter_->Initialize(100, 1000, 1060, 1500, 500, 1700, 1000, 2200);
+				goal_->Initialize(3500);
+				stopTimer = 360;
+				isStop = true;
+				select = true;
 				scene = 4;
 			}
 			if (keys[KEY_INPUT_SPACE] == 1 && oldkeys[KEY_INPUT_SPACE] == 0 && stageFlag == 3)
@@ -271,28 +450,32 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 						windowL_->Initialize(-1000, 1200, -1000, -1000);
 						helicopter_->Initialize(600, 1500, 1000, 1500, -1000, -1000, -1000, -1000);
 						goal_->Initialize(2500);
-						stopTimer = 240;
+						stopTimer = 360;
+						select = true;
 						isStop = true;
 					}
 					else if (nowScene == 3)
 					{
 						player_->Initialize();
-						airport_->Initialize(0, 900, 1200, 1300, -1000, -1000, -1000, -1000);
-						windowL_->Initialize(-1000, 1200, -1000, -1000);
-						helicopter_->Initialize(600, 1500, 1000, 1500, -1000, -1000, -1000, -1000);
+						airport_->Initialize(0, 800, 1200, 900, 0, 1800, 1200, 1900);
+						windowL_->Initialize(1300, 1500, -1000, -1000);
+						helicopter_->Initialize(0, 1500, 600, 1500, 1200, 1500, -1000, -1000);
 						goal_->Initialize(2500);
-						stopTimer = 240;
+						stopTimer = 360;
+						select = true;
 						isStop = true;
 					}
 					else if (nowScene == 4)
 					{
 						player_->Initialize();
-						airport_->Initialize(0, 900, 1200, 1300, -1000, -1000, -1000, -1000);
-						windowL_->Initialize(-1000, 1200, -1000, -1000);
-						helicopter_->Initialize(600, 1500, 1000, 1500, -1000, -1000, -1000, -1000);
-						goal_->Initialize(2500);
-						stopTimer = 240;
+						airport_->Initialize(0, 900, 1200, 1200, 0, 1800, 1200, 2300);
+						windowL_->Initialize(200, 1000, 1800, 2600);
+						windowR_->Initialize(600, 1400, 2200, 3000);
+						helicopter_->Initialize(100, 1000, 1060, 1500, 500, 1700, 1000, 2200);
+						goal_->Initialize(3500);
+						stopTimer = 360;
 						isStop = true;
+						select = true;
 					}
 					scene = nowScene;
 				}
